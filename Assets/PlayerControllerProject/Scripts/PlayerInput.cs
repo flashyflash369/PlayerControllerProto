@@ -5,10 +5,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    public static PlayerInput Instance;
 
     public Vector3 movementInput;
 
     public bool isMoving;
+
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            return;
+        }
+
+        Instance = this;
+
+    }
 
     public void OnMovement(InputAction.CallbackContext value)
     {
@@ -19,6 +31,7 @@ public class PlayerInput : MonoBehaviour
             isMoving = true;
             return;
         }
+        movementInput = Vector3.zero;
         isMoving = false;
     }
 }
